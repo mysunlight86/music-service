@@ -43,13 +43,22 @@ export const videoPlayerInit = () => {
     const currentTime = videoPlayer.currentTime;
     const duration = videoPlayer.duration;
 
+    videorogress.value = (currentTime / duration) * 100;
+
     let minutesPassed = Math.floor(currentTime / 60);
     let secondsPassed = Math.floor(currentTime % 60);
 
     let minutesTotal = Math.floor(duration / 60);
     let secondsTotal = Math.floor(duration % 60);
 
-    videoTimePassed.textContent = addZero(minutesPassed) + ':' + addZero(secondsPassed);
-    videoTimeTotal.textContent = addZero(minutesTotal) + ':' + addZero(secondsTotal);
+    videoTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
+    videoTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
+  });
+
+  videorogress.addEventListener('change', () => {
+    const duration = videoPlayer.duration;
+    const value = videorogress.value;
+
+    videoPlayer.currentTime = (value * duration) / 100;
   });
 };
