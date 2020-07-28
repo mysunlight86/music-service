@@ -22,10 +22,11 @@ export const videoPlayerInit = () => {
     } else {
       videoPlayer.pause();
     }
-
-    toggleIcon();
   };
 
   videoPlayer.addEventListener('click', togglePlay);
   videoButtonPlay.addEventListener('click', togglePlay);
+
+  videoPlayer.addEventListener('play', toggleIcon);
+  videoPlayer.addEventListener('pause', toggleIcon);
 };
